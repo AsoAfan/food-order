@@ -29,3 +29,23 @@ To set up this project, follow these steps:
   - finally, let's import their database into our machine by clicking on `Server` at the top menu bar of the application
   - a list will be opened, now click `Data Import`
   - choose `Import from Self-Contained File` which is second radio button
+  - then, click on `...` to chose `.sql` file
+  - go to the project folder and select `food-order.sql`
+  - after that, choose default schema(database), so tables will be created in
+  - finally, go to `Import Progress` tab beneath **Data Import** title and click on **Start Import**
+- connect app to our databas
+  - open `<project_folder>/components/connect.php`
+  - change `$user_password` value to your database password
+- It's time to do our work and start the app to see how is their magic
+  - open project folder in terminal (right-click in an empty area and click `open in terminal`, *right-click two times if 
+    that option does not exist*) 
+  - run php server by executing this in terminal
+    ```shell
+    php -S localhost:88
+    ```
+    in the end, you can open the app in the browser from http://localhost:88/home.php
+    the pattern is like this: `http://localhost:88/path/to/file_name.php`
+  
+I think that's all, feel free to ask for any confusing or something i forgot <br>
+Happy coding 🥰
+    
