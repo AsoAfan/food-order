@@ -21,7 +21,7 @@ if(isset($_POST['submit'])){
    $pass = sha1($_POST['pass']);
    $pass = htmlentities($pass);
    $cpass = sha1($_POST['cpass']);
-   $cpass = htmlentities();
+   $cpass = htmlentities($cpass);
 
    $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? OR number = ?");
    $select_user->execute([$email, $number]);
