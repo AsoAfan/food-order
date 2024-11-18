@@ -13,13 +13,13 @@ if(!isset($admin_id)){
 if(isset($_POST['update'])){
 
    $pid = $_POST['pid'];
-   $pid = filter_var($pid, FILTER_SANITIZE_STRING);
+   $pid = htmlentities($pid);
    $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
+   $name = htmlentities($name);
    $price = $_POST['price'];
-   $price = filter_var($price, FILTER_SANITIZE_STRING);
+   $price = htmlentities($price);
    $category = $_POST['category'];
-   $category = filter_var($category, FILTER_SANITIZE_STRING);
+   $category = htmlentities($category);
 
    $update_product = $conn->prepare("UPDATE `products` SET name = ?, category = ?, price = ? WHERE id = ?");
    $update_product->execute([$name, $category, $price, $pid]);
@@ -28,7 +28,7 @@ if(isset($_POST['update'])){
 
    $old_image = $_POST['old_image'];
    $image = $_FILES['image']['name'];
-   $image = filter_var($image, FILTER_SANITIZE_STRING);
+   $image = htmlentities($image);
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = '../uploaded_img/'.$image;
@@ -79,7 +79,7 @@ if(isset($_POST['update'])){
       $show_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
       $show_products->execute([$update_id]);
       if($show_products->rowCount() > 0){
-         while($fetch_products = $show_products->fetch(PDO::FETCH_ASSOC)){  
+         while($fetch_products = $show_products->fetch(PDO::FETCH_ASSOC)){
    ?>
    <form action="" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">

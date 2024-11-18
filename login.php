@@ -13,9 +13,9 @@ if(isset($_SESSION['user_id'])){
 if(isset($_POST['submit'])){
 
    $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
+   $email = htmlentities($email);
    $pass = sha1($_POST['pass']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+   $pass = htmlentities($pass);
 
    $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ?");
    $select_user->execute([$email, $pass]);
@@ -48,7 +48,7 @@ if(isset($_POST['submit'])){
 
 </head>
 <body>
-   
+
 <!-- header section starts  -->
 <?php include 'components/user_header.php'; ?>
 <!-- header section ends -->

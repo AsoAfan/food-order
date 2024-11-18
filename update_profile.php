@@ -14,12 +14,12 @@ if(isset($_SESSION['user_id'])){
 if(isset($_POST['submit'])){
 
    $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
+   $name = htmlentities($name);
 
    $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
+   $email = htmlentities($email);
    $number = $_POST['number'];
-   $number = filter_var($number, FILTER_SANITIZE_STRING);
+   $number = htmlentities($number);
 
    if(!empty($name)){
       $update_name = $conn->prepare("UPDATE `users` SET name = ? WHERE id = ?");
@@ -47,18 +47,18 @@ if(isset($_POST['submit'])){
          $update_number->execute([$number, $user_id]);
       }
    }
-   
+
    $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
    $select_prev_pass = $conn->prepare("SELECT password FROM `users` WHERE id = ?");
    $select_prev_pass->execute([$user_id]);
    $fetch_prev_pass = $select_prev_pass->fetch(PDO::FETCH_ASSOC);
    $prev_pass = $fetch_prev_pass['password'];
    $old_pass = sha1($_POST['old_pass']);
-   $old_pass = filter_var($old_pass, FILTER_SANITIZE_STRING);
+   $old_pass = htmlentities($old_pass);
    $new_pass = sha1($_POST['new_pass']);
-   $new_pass = filter_var($new_pass, FILTER_SANITIZE_STRING);
+   $new_pass = htmlentities($new_pass);
    $confirm_pass = sha1($_POST['confirm_pass']);
-   $confirm_pass = filter_var($confirm_pass, FILTER_SANITIZE_STRING);
+   $confirm_pass = htmlentities($confirm_pass);
 
    if($old_pass != $empty_pass){
       if($old_pass != $prev_pass){
@@ -74,7 +74,7 @@ if(isset($_POST['submit'])){
             $message[] = 'please enter a new password!';
          }
       }
-   }  
+   }
 
 }
 
@@ -96,7 +96,7 @@ if(isset($_POST['submit'])){
 
 </head>
 <body>
-   
+
 <!-- header section starts  -->
 <?php include 'components/user_header.php'; ?>
 <!-- header section ends -->

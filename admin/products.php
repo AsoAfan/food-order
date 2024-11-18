@@ -13,14 +13,14 @@ if(!isset($admin_id)){
 if(isset($_POST['add_product'])){
 
    $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
+   $name = htmlentities($name);
    $price = $_POST['price'];
-   $price = filter_var($price, FILTER_SANITIZE_STRING);
+   $price = htmlentities($price);
    $category = $_POST['category'];
-   $category = filter_var($category, FILTER_SANITIZE_STRING);
+   $category = htmlentities($category);
 
    $image = $_FILES['image']['name'];
-   $image = filter_var($image, FILTER_SANITIZE_STRING);
+   $image = htmlentities($image);
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = '../uploaded_img/'.$image;
@@ -115,7 +115,7 @@ if(isset($_GET['delete'])){
       $show_products = $conn->prepare("SELECT * FROM `products`");
       $show_products->execute();
       if($show_products->rowCount() > 0){
-         while($fetch_products = $show_products->fetch(PDO::FETCH_ASSOC)){  
+         while($fetch_products = $show_products->fetch(PDO::FETCH_ASSOC)){
    ?>
    <div class="box">
       <img src="../uploaded_img/<?= $fetch_products['image']; ?>" alt="">

@@ -13,13 +13,13 @@ if(isset($_SESSION['user_id'])){
 if(isset($_POST['send'])){
 
    $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
+   $name = htmlentities($name);
    $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
+   $email = htmlentities($email);
    $number = $_POST['number'];
-   $number = filter_var($number, FILTER_SANITIZE_STRING);
+   $number = htmlentities($number);
    $msg = $_POST['msg'];
-   $msg = filter_var($msg, FILTER_SANITIZE_STRING);
+   $msg = htmlentities($msg);
 
    $select_message = $conn->prepare("SELECT * FROM `messages` WHERE name = ? AND email = ? AND number = ? AND message = ?");
    $select_message->execute([$name, $email, $number, $msg]);
@@ -55,7 +55,7 @@ if(isset($_POST['send'])){
 
 </head>
 <body>
-   
+
 <!-- header section starts  -->
 <?php include 'components/user_header.php'; ?>
 <!-- header section ends -->
